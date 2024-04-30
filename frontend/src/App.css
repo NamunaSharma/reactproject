@@ -1,0 +1,11 @@
+/* styles.css (or your global styles file) */
+html, body, #root {
+  height: 100%; /* Ensure full height of the screen */
+  margin: 0;
+  padding: 0;
+}
+
+.flex {
+  display: flex; /* Use flex layout to arrange Navbar and Products side by side */
+  height: 100%; /* Ensure full height of the screen */
+}

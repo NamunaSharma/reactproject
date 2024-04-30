@@ -1,0 +1,92 @@
+.login_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container for the login form and image */
+.login_form_container {
+  display: flex;
+  width: 70%; /* Adjust the width as needed */
+  max-width: 800px; /* Adjust the maximum width as needed */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Left side containing the login form */
+.left {
+  flex: 1;
+  padding: 30px; /* Adjust padding as needed */
+  background-color: #f9f9f9;
+}
+
+/* Right side containing the image */
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #942773;
+}
+
+/* Container for the form elements */
+.form_container {
+  max-width: 400px;
+}
+
+/* Styling for input fields */
+.input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Styling for error messages */
+.error_msg {
+  color: #f34646;
+  margin-bottom: 20px;
+}
+
+/* Styling for the Sign In button */
+.green_btn {
+  background-color: #942773;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.green_btn:hover {
+  background-color: #7a1e5c;
+}
+
+/* Styling for the "Don't have an account?" message */
+.signup_message {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #555;
+}
+
+/* Styling for the Sign Up button */
+.signup_btn {
+  background-color: #090c0c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup_btn:hover {
+  background-color: #2e896d;
+}
