@@ -32,14 +32,14 @@ const bookSchema = mongoose.Schema({
     required: true,
   },
   reviews: [{ type: mongoose.Types.ObjectId, ref: "Review" }],
-  averageRating: {
-    type: Number,
-    default: 0,
-  },
-  totalRating: {
-    type: Number,
-    default: 0,
-  },
+  // averageRating: {
+  //   type: Number,
+  //   default: 0,
+  // },
+  // totalRating: {
+  //   type: Number,
+  //   default: 0,
+  // },
 });
 
 export const Book = mongoose.model("Book", bookSchema);

@@ -425,7 +425,7 @@ function AdminPage() {
 
   const fetchBookCount = async () => {
     try {
-      const response = await axios.get("http://localhost:5555/books");
+      const response = await axios.get("http://localhost:5555/books/book");
       setBookCount(response.data.count);
     } catch (error) {
       console.error("Error fetching book count:", error);

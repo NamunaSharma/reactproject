@@ -231,13 +231,15 @@ const BookDetailsPage = () => {
       </div>
       {/* Customer Reviews Section */}
       <div className="py-8">
-        <h2 className="text-2xl font-bold mb-4">Customer Reviews</h2>
+        <h2 className="text-2xl font-bold ">Customer Reviews</h2>
 
-        <div className="bg-white rounded-lg shadow-lg p-2 h-12 w-13 ">
+        <div className="bg-white rounded-lg shadow-lg p-10 h-19 w-13  ">
           {reviews.map((review) => (
-            <div key={review._id} className="bg-white rounded-lg shadow-lg p-2">
+            <div key={review._id} className=" rounded-lg shadow-lg ">
               <p className="font-bold mb-2">
-                {firstName} {lastName}
+                {review.user
+                  ? `${review.user.firstName} ${review.user.lastName}`
+                  : "Unknown User"}
               </p>
               <div className="flex items-center">
                 {renderStars(review.rating)}

@@ -1,6 +1,6 @@
 // import Review from "../models/ReviewSchema.js";
 import Review from "../models/review.js";
-import { Book } from "../models/bookModel.js";
+// import { Book } from "../models/bookModel.js";
 import router from "./booksRoute.js";
 
 // export const getAllReviews
@@ -9,7 +9,10 @@ router.get("/getAllReviews/:id", async (request, response) => {
     const { id } = request.params;
 
     // Find reviews associated with the provided book ID
-    const reviews = await Review.find({ book: id });
+    const reviews = await Review.find({ book: id }).populate(
+      "user",
+      "firstName lastName"
+    );
 
     if (reviews.length === 0) {
       return response.status(404).json({
@@ -54,11 +57,24 @@ router.post("/createReview", async (request, response) => {
 });
 router.get("/", async (req, res) => {
   try {
-    const reviews = await Review.find(); // Fetch all reviews from the database
-    res.json(reviews); // Send the reviews as JSON response
+    // Find all reviews in the database
+    const reviews = await Review.find();
+
+    // Send the reviews as JSON response
+    res.json(reviews);
   } catch (error) {
     console.error("Error fetching reviews:", error);
     res.status(500).json({ error: "Error fetching reviews" }); // Send an error response
   }
 });
+// router.get("/getReview", async (req, res) => {
+//   try {
+
+//     const reviews = await Review.find(); // Fetch all reviews from the database
+//     res.json(reviews); // Send the reviews as JSON response
+//   } catch (error) {
+//     console.error("Error fetching reviews:", error);
+//     res.status(500).json({ error: "Error fetching reviews" }); // Send an error response
+//   }
+// });
 export default router;

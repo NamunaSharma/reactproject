@@ -1,72 +1,3 @@
-// // import express from "express";
-// import { PORT, mongoDBURL } from "./config.js";
-// import mongoose from "mongoose";
-// import booksRoute from "./routes/booksRoute.js";
-// // import cors from "cors";
-// import dotenv from "dotenv";
-// //loginsignup
-// require("dotenv").config();
-// const express = require("express");
-// app = express();
-// const cors = require("cors");
-// const connection = require("./db");
-// const userRoutes = require("./routes/users");
-// const authRoutes = require("./routes/auth");
-
-// // database connection
-// connection();
-
-// // middlewares
-// app.use(express.json());
-// app.use(cors());
-
-// // routes
-// app.use("/api/users", userRoutes);
-// app.use("/api/auth", authRoutes);
-
-// const port = process.env.PORT || 8080;
-// app.listen(port, console.log(`Listening on port ${port}...`));
-
-// /***** */
-
-// const app = express();
-
-// // Middleware for parsing request body
-// app.use(express.json());
-
-// // Middleware for handling CORS POLICY
-// // Option 1: Allow All Origins with Default of cors(*)
-// app.use(cors());
-// // Option 2: Allow Custom Origins
-// // app.use(
-// //   cors({
-// //     origin: 'http://localhost:3000',
-// //     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-// //     allowedHeaders: ['Content-Type'],
-// //   })
-// // );
-
-// app.get("/", (request, response) => {
-//   console.log(request);
-//   return response.status(234).send("Welcome ");
-// });
-
-// app.use("/books", booksRoute);
-
-// mongoose
-//   .connect(mongoDBURL)
-//   .then(() => {
-//     console.log("App connected to database");
-//     app.listen(PORT, () => {
-//       console.log(`App is listening to port: ${PORT}`);
-//     });
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
-
-// Importing required modules
-// Importing required modules
 import express from "express";
 import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
@@ -111,17 +42,15 @@ mongoose
   });
 
 // Routes
+app.use("/api/reviews", reviewController);
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
-
 app.use("/books", booksRoute);
 
 app.use("/api/category", categoryRoutes);
 app.use("/api/orders", orderController);
-app.use("/api/review", reviewController);
-// app.use("/api/orders", orderController);
-// app.use("/api/stripe", striperoute);
-// Default route
+// Middleware for handling errors
+
 app.get("/", (request, response) => {
   console.log(request);
   return response.status(200).send("Welcome");
@@ -146,8 +75,6 @@ app.post("/checkout/:userId", async (req, res) => {
       books: items.map((item) => item.id), // Use the correct property name
       cartItems: items,
       totalPrice: totalPrice,
-      // quantity: items.map((item) => item.quantity),
-      // price: items.map((item) => item.totalPrice),
     });
 
     // Save the order to the database
