@@ -38,6 +38,7 @@ import OrderPage from "./orderpage";
 import AdminReviewsPage from "./adminreviewpage";
 import Banner from "./Banner";
 import AdminPage from "./adminpage";
+import UsedBooks from "./pages/usedbooks";
 // import Payment from "./components/userpage/Cart/payment";
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
       <Route path="/adminreview" exact element={<AdminReviewsPage />} />
       <Route path="/banner" exact element={<Banner />} />
       <Route path="/admin" exact element={<AdminPage />} />
+      <Route path="/usedbooks" element={<UsedBooks />} />
     </Routes>
   );
   // const user = localStorage.getItem("token");

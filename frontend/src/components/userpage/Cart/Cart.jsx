@@ -108,7 +108,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="container bg-white-200 min-h-screen">
+    <div className="homepage bg-white min-h-screen">
       <UserNavbar />
       {/* <h2 className="text-2xl font-bold mb-4">Cart</h2> */}
       {cartItems.length > 0 ? (
@@ -119,7 +119,7 @@ const Cart = () => {
               className="bg-white rounded-lg shadow-md p-4 flex items-center mb-4"
             >
               <img
-                src={`../../src/images/${item.image}`}
+                src={`http://localhost:5555/${item.image}`}
                 className="w-16 h-20 object-cover mr-4 rounded-lg"
                 alt={item.name}
               />
