@@ -643,7 +643,7 @@ const CategoryProduct = () => {
       : description;
   };
   return (
-    <div className="container mt-3">
+    <div className="homepage bg-white min-h-screen">
       <UserNavbar />
       {/* <h4 className="text-center">Category - {category?.name}</h4> */}
       {/* <h6 className="text-center">{books?.length} results found</h6> */}
@@ -655,7 +655,7 @@ const CategoryProduct = () => {
             style={{ width: "280px" }} // Adjust card width
           >
             <img
-              src={`../../src/images/${book.image}`}
+              src={`http://localhost:5555/${book.image}`}
               //   alt={book.title}
               className="w-64 h-80 object-cover mb-4 rounded-lg" // Increase image size
             />

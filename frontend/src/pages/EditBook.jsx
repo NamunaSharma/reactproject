@@ -723,20 +723,20 @@ const EditBook = () => {
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Previous Image
           </label>
-          {console.log(previousImage)}
           {previousImage ? (
             <div className="flex items-center mb-2">
               <img
-                src={`../../src/images/${previousImage}`}
+                src={`http://localhost:5555/${previousImage}`}
                 alt="Previous Book"
                 className="max-w-xs mr-2"
               />
-              <span>{previousImage}</span>
+              {/* <span>{previousImage}</span> */}
             </div>
           ) : (
             <span>No previous image available</span>
           )}
         </div>
+
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             New Image

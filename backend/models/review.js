@@ -26,7 +26,7 @@ const reviewSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
+export default mongoose.model("Review", reviewSchema);
 // reviewSchema.pre(/^find/, function (next) {
 //   this.populate({
 //     path: "user",
@@ -62,5 +62,3 @@ const reviewSchema = new mongoose.Schema(
 // reviewSchema.post("save", function () {
 //   this.constructor.calcAverageRatings(this.book);
 // });
-
-export default mongoose.model("Review", reviewSchema);
