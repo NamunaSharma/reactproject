@@ -11,7 +11,7 @@ User can view their order details.
 User can see their second hand book transactions and can delete it if it is sold.
 Payment is done using Stripe.
 All recommendations and the routes of the book are in **bookRoute.js**.
-A jason file is also made which consists the book name its contents and other information . A jason file is directly sent to the mongoose database.
+A json file is also made which consists the book name its contents and other information . A jason file is directly sent to the mongoose database.
 Login and  Signup.
 
 
