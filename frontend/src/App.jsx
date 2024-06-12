@@ -39,6 +39,7 @@ import AdminReviewsPage from "./adminreviewpage";
 import Banner from "./Banner";
 import AdminPage from "./adminpage";
 import UsedBooks from "./pages/usedbooks";
+import SearchResults from "./pages/SearchResults";
 // import Payment from "./components/userpage/Cart/payment";
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
       <Route path="/banner" exact element={<Banner />} />
       <Route path="/admin" exact element={<AdminPage />} />
       <Route path="/usedbooks" element={<UsedBooks />} />
+      <Route path="/search" element={<SearchResults />} />
     </Routes>
   );
   // const user = localStorage.getItem("token");

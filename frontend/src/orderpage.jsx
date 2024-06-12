@@ -7,6 +7,7 @@ const OrdersPage = () => {
   const [loading, setLoading] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [ordersReadyForDelivery, setOrdersReadyForDelivery] = useState([]);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -14,7 +15,11 @@ const OrdersPage = () => {
         const response = await axios.get("http://localhost:5555/api/orders", {
           params: { populate: ["user", "cartItems.book"] },
         });
-        setOrders(response.data);
+        // Sort orders by createdAt timestamp in descending order
+        const sortedOrders = response.data.sort(
+          (a, b) => b.createdAt - a.createdAt
+        );
+        setOrders(sortedOrders);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -25,13 +30,11 @@ const OrdersPage = () => {
     fetchOrders();
   }, []);
 
-  const getRandomColor = () => {
-    return "#" + Math.floor(Math.random() * 16777215).toString(16);
-  };
-
   const handleOrderReady = (orderId) => {
     setSelectedOrderId(orderId);
     setShowPopup(true);
+    // Add the order ID to the list of orders ready for delivery
+    setOrdersReadyForDelivery((prevOrders) => [...prevOrders, orderId]);
   };
 
   const handleClosePopup = () => {
@@ -59,36 +62,75 @@ const OrdersPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order) => (
-                  <tr key={order._id}>
-                    <td className="border px-6 py-4">
-                      {new Date(order.createdAt).toLocaleString()}
-                    </td>
-                    <td className="border px-6 py-4">
-                      {order.user &&
-                        `${order.user.firstName} ${order.user.lastName}`}
-                    </td>
-                    {order.cartItems.map((item) => (
-                      <React.Fragment key={item._id}>
-                        <td
-                          className="border px-6 py-4"
-                          // style={{ backgroundColor: getRandomColor() }}
+                {orders.map((order, index) => (
+                  <React.Fragment key={order._id}>
+                    {/* Render complete order details with date and user information */}
+                    <tr>
+                      <td className="border px-6 py-4">
+                        {new Date(order.createdAt).toLocaleString()}
+                      </td>
+                      <td className="border px-6 py-4">
+                        {order.user &&
+                          `${order.user.firstName} ${order.user.lastName}`}
+                      </td>
+                      <td className="border px-6 py-4">
+                        {order.cartItems[0].name}
+                      </td>
+                      <td className="border px-6 py-4">
+                        {order.cartItems[0].quantity}
+                      </td>
+                      <td className="border px-6 py-4">{order.totalPrice}</td>
+                      <td className="border px-6 py-4">
+                        {/* Disable the button if the order is already marked as ready for delivery */}
+                        <button
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          onClick={() => handleOrderReady(order._id)}
+                          disabled={ordersReadyForDelivery.includes(order._id)}
                         >
-                          {item.name}
-                        </td>
-                        <td className="border px-6 py-4">{item.quantity}</td>
-                      </React.Fragment>
-                    ))}
-                    <td className="border px-6 py-4">{order.totalPrice}</td>
-                    <td className="border px-6 py-4">
-                      <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() => handleOrderReady(order._id)}
-                      >
-                        Ready for Delivery
-                      </button>
-                    </td>
-                  </tr>
+                          {ordersReadyForDelivery.includes(order._id)
+                            ? "Ready for Delivery"
+                            : "Mark as Ready"}
+                        </button>
+                      </td>
+                    </tr>
+                    {/* Check if the current order has the same createdAt timestamp as the previous order */}
+                    {index > 0 &&
+                      orders[index - 1].createdAt === order.createdAt && (
+                        // If the timestamps are the same, render only book details duplicating date and user information
+                        <tr>
+                          <td className="border px-6 py-4">
+                            {new Date(order.createdAt).toLocaleString()}
+                          </td>
+                          <td className="border px-6 py-4">
+                            {order.user &&
+                              `${order.user.firstName} ${order.user.lastName}`}
+                          </td>
+                          <td className="border px-6 py-4">
+                            {order.cartItems[0].name}
+                          </td>
+                          <td className="border px-6 py-4">
+                            {order.cartItems[0].quantity}
+                          </td>
+                          <td className="border px-6 py-4">
+                            {order.totalPrice}
+                          </td>
+                          <td className="border px-6 py-4">
+                            {/* Disable the button if the order is already marked as ready for delivery */}
+                            <button
+                              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                              onClick={() => handleOrderReady(order._id)}
+                              disabled={ordersReadyForDelivery.includes(
+                                order._id
+                              )}
+                            >
+                              {ordersReadyForDelivery.includes(order._id)
+                                ? "Ready for Delivery"
+                                : "Mark as Ready"}
+                            </button>
+                          </td>
+                        </tr>
+                      )}
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>

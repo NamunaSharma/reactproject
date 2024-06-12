@@ -131,7 +131,7 @@ app.post("/checkout/:userId", async (req, res) => {
       cancel_url: "http://localhost:5173/cancel",
     });
 
-    console.log(session.url); // Log the URL before sending it in response
+    console.log(session.url); 
     res.json({ url: session.url });
   } catch (error) {
     console.error(error);
