@@ -27,11 +27,6 @@ const Navbar = () => {
               Categories
             </Link>
           </li>
-          <li>
-            <Link to="/adminreview" className="block p-4 hover:bg-gray-800">
-              Reviews
-            </Link>
-          </li>
         </ul>
       </nav>
     </div>

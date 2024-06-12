@@ -169,6 +169,17 @@ router.get("/book", async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+// Backend route to handle book search
+router.get("/search", async (req, res) => {
+  try {
+    const query = req.query.q; // Get the search query from the request query parameters
+    const books = await Book.find({ $text: { $search: query } }); // Search books based on the query
+    res.status(200).json(books); // Return the matching books as JSON response
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 // Route for Get One Book from database by id
 router.get("/:id", async (request, response) => {

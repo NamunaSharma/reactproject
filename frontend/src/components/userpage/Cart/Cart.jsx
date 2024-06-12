@@ -58,6 +58,7 @@ const Cart = () => {
       0
     );
   };
+
   const checkout = async () => {
     try {
       const totalPrice = calculateTotalPrice();
@@ -75,14 +76,7 @@ const Cart = () => {
       });
       const data = await res.json();
       localStorage.removeItem("cartItems");
-
-      // Reset the cart items state to an empty array
-      setCartItems([]);
-
-      // const orderId = data.orderId;
-
-      // Save the cart items to the order database
-      // await saveCartItemsToDatabase(orderId, cartItems);
+      setCartItems[""];
       console.log(data.url); // Log the URL received from the server
       window.location = data.url;
     } catch (error) {
@@ -124,24 +118,29 @@ const Cart = () => {
                 alt={item.name}
               />
               <div>
-                <h3 className="text-lg font-semibold text-blue-900">
+                <h3 className="text-lg font-semibold text-blue-900 mb-1">
                   {item.name}
                 </h3>
-                <p className="text-sm text-gray-600">Price: {item.price}</p>
-                <p className="text-sm text-gray-600">
+                <p className="text-lg text-gray-600 mb-1 ">
+                  Price:{" "}
+                  <span className="text-lg font-semibold">{item.price}</span>
+                </p>
+                <p className="text-lg text-gray-600 mb-1">
                   Quantity:
                   <button
                     onClick={() =>
                       handleQuantityChange(item.id, item.quantity - 1)
                     }
+                    className="text-xl bg-gray-200 px-3 py-1 rounded-md mr-1"
                   >
                     -
                   </button>
-                  {item.quantity}
+                  <span className="text-xl">{item.quantity}</span>
                   <button
                     onClick={() =>
                       handleQuantityChange(item.id, item.quantity + 1)
                     }
+                    className="text-xl bg-gray-200 px-3 py-1 rounded-md ml-1"
                   >
                     +
                   </button>
@@ -153,14 +152,15 @@ const Cart = () => {
               </div>
               <button
                 onClick={() => removeFromCart(item.id)}
-                className="ml-auto text-red-600 hover:text-red-800 focus:outline-none"
+                className="ml-auto text-red-600 hover:text-red-800 focus:outline-none text-2xl"
               >
                 &#10006; {/* Unicode for cross symbol */}
               </button>
             </div>
+
           ))}
           <div className="text-right">
-            <h3 className="text-lg font-semibold">
+            <h3 className="text-2xl font-semibold">
               Total Price: {calculateTotalPrice()}
             </h3>
           </div>
