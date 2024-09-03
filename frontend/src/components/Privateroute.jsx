@@ -9,7 +9,6 @@ function Privateroute() {
   } else {
     return <Navigate to="/" />;
   }
-  //   return isLoggedIn() ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export default Privateroute;
