@@ -194,24 +194,6 @@ router.get("/:id", async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
-// router.get("/product-category/:slug", async (request, response) => {
-//   try {
-//     const category = await categoryModel.findOne({ slug: request.params.slug });
-//     const books = await bookModel.find({ category }).populate("category");
-//     response.status(200).send({
-//       success: true,
-//       category,
-//       books,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     response.status(400).send({
-//       success: false,
-//       error,
-//       message: "Error While Getting products",
-//     });
-//   }
-// });
 router.get("/product-category/:slug", async (request, response) => {
   try {
     const category = await categoryModel.findOne({ slug: request.params.slug });

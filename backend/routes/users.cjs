@@ -7,41 +7,6 @@ const {
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// router.post("/", async (req, res) => {
-//   try {
-//     const { error } = validateLogin(req.body);
-//     if (error)
-//       return res.status(400).send({ message: error.details[0].message });
-
-//     const { email, password } = req.body;
-
-//     const user = await User.findOne({ email });
-//     if (!user)
-//       return res.status(401).send({ message: "Invalid Email or Password" });
-
-//     const validPassword = await bcrypt.compare(password, user.password);
-//     if (!validPassword)
-//       return res.status(401).send({ message: "Invalid Email or Password" });
-
-//     // Generate a JWT token containing the user ID
-//     const token = jwt.sign({ _id: user._id }, process.env.JWTPRIVATEKEY, {
-//       expiresIn: "7d",
-//     });
-
-//     // Send the token and user ID in the response
-//     res.status(200).send({
-//       data: { token, userId: user._id },
-//       message: "Logged in successfully",
-//     });
-
-//     // Store the user ID in local storage
-//     localStorage.setItem("userId", user._id); // Assuming localStorage is available in your backend environment
-//   } catch (error) {
-//     console.error("Error:", error.message);
-//     res.status(500).send({ message: "Internal Server Error" });
-//   }
-// });
-
 router.get("/", async (req, res) => {
   try {
     const users = await User.find();

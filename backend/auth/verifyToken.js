@@ -10,6 +10,7 @@ export const authenticate = async (req, res, next) => {
       .status(401)
       .json({ success: false, message: "No token, authorization denied!" });
   }
+
   try {
     const token = authToken.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
@@ -26,24 +27,27 @@ export const authenticate = async (req, res, next) => {
   }
 };
 
+/**
+ * Middleware to restrict access based on user roles.
+ */
 export const restrict = (roles) => async (req, res, next) => {
   const userId = req.userId;
 
-  let user;
+  try {
+    const customer = await Customer.findById(userId);
+    const admin = await Admin.findById(userId);
 
-  const customer = await Customer.findById(userId);
-  const admin = await Admin.findById(userId);
+    const user = customer || admin;
 
-  if (customer) {
-    user = customer;
+    if (!user || !roles.includes(user.role)) {
+      return res
+        .status(403)
+        .json({ success: false, message: "You are not authorized." });
+    }
+
+    next();
+  } catch (err) {
+    console.error("Error in restrict middleware:", err);
+    return res.status(500).json({ success: false, message: "Server error." });
   }
-  if (admin) {
-    user = admin;
-  }
-  if (!user || !roles.includes(user.role)) {
-    return res
-      .status(401)
-      .json({ success: false, message: "You are not authorized." });
-  }
-  next();
 };
